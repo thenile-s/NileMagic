@@ -1,0 +1,54 @@
+{
+    "schemaVersion": 1,
+    "id": "nilemagic",
+    "version": "${version}",
+
+    "name": "Nile's Magic",
+    "description": "Spells, pets, utility and love!",
+    "authors": [
+        "The Nile"
+    ],
+    "contact": {
+        "homepage": "",
+        "sources": ""
+    },
+
+    "license": "CC0-1.0",
+    "icon": "assets/nilemagic/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "net.nile.magic.NileMagic",
+            "net.nile.magic.items.Items",
+            "net.nile.magic.statuseffects.StatusEffects",
+            "net.nile.magic.entities.Entities",
+            "net.nile.magic.commands.Commands"
+        ],
+        "cardinal-components": [
+            "net.nile.magic.players.PlayerComponents"
+        ],
+        "client": [
+            "net.nile.magic.client.NileMagicClient",
+            "net.nile.magic.client.entities.renderers.EntityRenderers",
+            "net.nile.magic.client.networking.handlers.NetworkHandlers"
+        ]
+    },
+    "mixins": [
+        "nilemagic.mixins.json"
+    ],
+
+    "depends": {
+        "fabricloader": ">=0.7.4",
+        "fabric": "*",
+        "minecraft": "1.16.x"
+    },
+    "suggests": {
+        "another-mod": "*"
+    },
+    "custom": {
+        "cardinal-components": [
+            "nilemagic:mana"
+        ]
+    }
+}

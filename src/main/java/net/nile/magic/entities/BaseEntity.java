@@ -4,6 +4,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.Vec3d;
@@ -27,13 +28,18 @@ public abstract class BaseEntity extends Entity implements IAnimatable {
             
         //if(!this.world.isClient)NileMagic.logger.info(getPos());
 
-        super.tick();
 
         Vec3d movement = getVelocity();
 
-        Vec3d newPos = getPos().add(movement);
+        //Vec3d newPos = getPos().add(movement);
 
-        updatePosition(newPos.x, newPos.y, newPos.z);
+        move(MovementType.SELF, movement);
+
+        super.tick();
+
+
+        //updatePosition(newPos.x, newPos.y, newPos.z);
+
         //this.setVelocity(this.getVelocity().multiply(0.9D));
         //NileMagic.logger.info("BBBB " + getVelocity() + "  " + getPos());
     }

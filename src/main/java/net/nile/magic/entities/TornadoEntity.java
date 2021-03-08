@@ -4,15 +4,18 @@ import java.util.List;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 //ThrownItemEntity
 //BlockEntity
+//ProjectileEntity
 
 public class TornadoEntity extends BaseEntity {
 
@@ -107,7 +110,7 @@ public class TornadoEntity extends BaseEntity {
                     });
 
             for (int i = 0; i < entities.size(); i++) {
-                if (entities.get(i).getEntityId() != m_owner.getEntityId())
+                if (m_owner == null || entities.get(i).getEntityId() != m_owner.getEntityId())
                     entities.get(i).damage(DamageSource.magic(this, m_owner), getDamage());
             }
 
@@ -121,5 +124,14 @@ public class TornadoEntity extends BaseEntity {
 
         super.tick();
 
+    }
+
+    @SuppressWarnings("resource")
+    @Override
+    public void remove() {
+        if(world.isClient){
+            MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.WHITE_ASH, getX(), getY(), getZ(), 0, 0, 0);
+        }
+        super.remove();
     }
 }

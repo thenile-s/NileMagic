@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.nile.magic.NileMagic;
 import net.nile.magic.entities.Entities;
+import net.nile.magic.entities.FireBlastEntity;
 import net.nile.magic.entities.TornadoEntity;
 
 public class EntitySpawnHandler implements PlayChannelHandler {
@@ -47,8 +48,10 @@ public class EntitySpawnHandler implements PlayChannelHandler {
 
             Entity entity = null;
 
-            if (type == Entities.TORNADO) {
+            if (type == Entities.TORNADO) {//TODO better entity spawn packet handling??
                 entity = new TornadoEntity(type, client.world);
+            } else if (type == Entities.FIRE_BLAST){
+                entity = new FireBlastEntity(type, client.world);
             }
             
             if (entity != null) {

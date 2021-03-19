@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import net.nile.magic.NileMagic;
 import net.nile.magic.players.IManaComponent;
 import net.nile.magic.players.PlayerComponents;
 import net.nile.magic.spells.Spell;
@@ -22,8 +23,13 @@ public class SpellScrollItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 
+        if(!world.isClient()){
+            user.getStackInHand(hand).getTag().putBoolean("test_passs", true);
+        }
+        NileMagic.logger.info("Client tag is " + user.getStackInHand(hand).getTag());
+
         if (user instanceof ServerPlayerEntity) {
-            // TODO mana consumption scroll item and durability
+            
             ServerPlayerEntity player = (ServerPlayerEntity) user;
 
             ItemStack stack = player.getStackInHand(hand);
@@ -44,9 +50,9 @@ public class SpellScrollItem extends Item {
                 } else {
                     IManaComponent mana = PlayerComponents.MANA.get(player);
                     if (mana.getCurrent() >= spell.getManaCost()) {
-                        stack.damage(1, world.random, player);
-                        if (stack.getDamage() == 0) {
-                            stack.decrement(1);
+                        stack.setDamage(stack.getDamage() + 1);
+                        if (stack.getDamage() >= getMaxDamage()) {
+                            user.setStackInHand(hand, ItemStack.EMPTY);
                         }
                         mana.deplete(spell.getManaCost());
                         spell.cast(player, power);

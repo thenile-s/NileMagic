@@ -4,7 +4,6 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.Vec3d;
@@ -19,29 +18,6 @@ public abstract class BaseEntity extends Entity implements IAnimatable {
 
     public BaseEntity(EntityType<?> type, World world) {
         super(type, world);
-    }
-
-    @Override
-    public void tick() {
-
-        //this.move(MovementType.SELF, getVelocity());
-            
-        //if(!this.world.isClient)NileMagic.logger.info(getPos());
-
-
-        Vec3d movement = getVelocity();
-
-        //Vec3d newPos = getPos().add(movement);
-
-        move(MovementType.SELF, movement);
-
-        super.tick();
-
-
-        //updatePosition(newPos.x, newPos.y, newPos.z);
-
-        //this.setVelocity(this.getVelocity().multiply(0.9D));
-        //NileMagic.logger.info("BBBB " + getVelocity() + "  " + getPos());
     }
 
     public PacketByteBuf writeClientSpawnData(PacketByteBuf buf) {
@@ -72,6 +48,12 @@ public abstract class BaseEntity extends Entity implements IAnimatable {
         return ServerPlayNetworking.createS2CPacket(EntitySpawnHandler.CHANNEL,
                 writeClientSpawnData(new PacketByteBuf(Unpooled.buffer())));
     }
+
+    //hmmm, what shall it be?
+    // @Override
+    // public PistonBehavior getPistonBehavior() {
+    //     return PistonBehavior.IGNORE;
+    // }
 
     @Override
     public void registerControllers(AnimationData data) {

@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.nile.magic.screenhandlers.SpellTomeScreenHandlerFactory;
 
 public class SpellTomeItem extends Item {
 
@@ -19,9 +18,9 @@ public class SpellTomeItem extends Item {
 
         if(user.world.isClient) return super.use(world, user, hand);
 
-        ItemStack itemStack = user.getStackInHand(hand);
-
-        user.openHandledScreen(new SpellTomeScreenHandlerFactory(itemStack));
+        //ItemStack itemStack = user.getStackInHand(hand);
+        
+        //TODO spell tome use
 
         return super.use(world, user, hand);
     }

@@ -23,7 +23,8 @@
             "net.nile.magic.items.Items",
             "net.nile.magic.statuseffects.StatusEffects",
             "net.nile.magic.entities.Entities",
-            "net.nile.magic.commands.Commands"
+            "net.nile.magic.commands.Commands",
+            "net.nile.magic.blocks.Blocks"
         ],
         "cardinal-components": [
             "net.nile.magic.players.PlayerComponents"

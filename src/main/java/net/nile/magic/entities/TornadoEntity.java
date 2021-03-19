@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
@@ -17,7 +18,7 @@ import net.minecraft.world.World;
 //BlockEntity
 //ProjectileEntity
 
-public class TornadoEntity extends BaseEntity {
+public class TornadoEntity extends OwnedSpellEntity {
 
     private Entity m_owner;
 
@@ -96,31 +97,30 @@ public class TornadoEntity extends BaseEntity {
         setVelocity(velocity.multiply(m));
     }
 
-    @SuppressWarnings({ "resource" })
     @Override
     public void tick() {
 
-        if (this.getEntityWorld().isClient) {
+        if (this.world.isClient) {
             this.yaw += getRotationSpeed();
+            this.yaw = yaw % 360;//lol idk it looks ok but maybe u should change it
         } else {
 
-            List<Entity> entities = this.world.getOtherEntities(this, this.getBoundingBox().stretch(this.getVelocity()),
-                    (entityx) -> {
-                        return !entityx.isSpectator() && entityx.collides();
-                    });
+            List<Entity> entities = this.world.getOtherEntities(this, this.getBoundingBox().stretch(this.getVelocity()),this::isEntityEnemy);
 
             for (int i = 0; i < entities.size(); i++) {
-                if (m_owner == null || entities.get(i).getEntityId() != m_owner.getEntityId())
-                    entities.get(i).damage(DamageSource.magic(this, m_owner), getDamage());
+                entities.get(i).damage(DamageSource.magic(this, m_owner), getDamage());
             }
 
-            if(world.getBlockCollisions(this, this.getBoundingBox()).count() > 0 || m_age >= m_maxAge){
+            if (m_age >= m_maxAge) {
                 remove();
-            }
-            else{
+            } else {
                 m_age++;
             }
         }
+
+        Vec3d movement = getVelocity();
+
+        move(MovementType.SELF, movement);
 
         super.tick();
 
@@ -129,9 +129,17 @@ public class TornadoEntity extends BaseEntity {
     @SuppressWarnings("resource")
     @Override
     public void remove() {
-        if(world.isClient){
-            MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.WHITE_ASH, getX(), getY(), getZ(), 0, 0, 0);
+        if (world.isClient) {
+            for (int i = 0; i < 10; i++) {
+                MinecraftClient.getInstance().particleManager.addParticle(ParticleTypes.CLOUD, getX(), getY() + i / 10f, getZ(),
+                        0, 0, 0);
+            }
         }
         super.remove();
+    }
+
+    @Override
+    public Entity getOwner() {
+        return m_owner;
     }
 }

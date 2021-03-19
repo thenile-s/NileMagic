@@ -2,12 +2,14 @@ package net.nile.magic.items;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.nile.magic.NileMagic;
+import net.nile.magic.blocks.Blocks;
 import net.nile.magic.items.mana.ManaResetItem;
 import net.nile.magic.items.mana.MaxManaItem;
 import net.nile.magic.items.spell.SpellScrollItem;
@@ -50,6 +52,11 @@ public class Items implements ModInitializer {
 
     public static final Item SPELL_SCROLL = new SpellScrollItem(new Item.Settings().maxCount(1).group(NileMagic.SPELL_GROUP).maxDamage(3));
 
+
+    //blocks
+
+    public static final BlockItem TOME_TABLE = new BlockItem(Blocks.TOME_TABLE, new Item.Settings().group(ItemGroup.DECORATIONS));
+
     @Override
     public void onInitialize() {
             //cons
@@ -70,6 +77,11 @@ public class Items implements ModInitializer {
         //scrolls
 
         Registry.register(Registry.ITEM, new Identifier(NileMagic.modid, "spell_scroll"), SPELL_SCROLL);
+
+        //blocks
+
+        Registry.register(Registry.ITEM, new Identifier(NileMagic.modid, "tome_table"), TOME_TABLE);
+
 
     }
 }

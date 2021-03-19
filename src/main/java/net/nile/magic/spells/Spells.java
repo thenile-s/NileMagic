@@ -8,8 +8,11 @@ public class Spells {
     
     public static final TornadoSpell TORNADO = new TornadoSpell();
 
+    public static final Spell FIRE_BLAST = new FireBlastSpell();
+
     static{
         SPELLS.put("tornado", TORNADO);
+        SPELLS.put("fire_blast", FIRE_BLAST);
     }
 
     public static Spell getSpell(String id){

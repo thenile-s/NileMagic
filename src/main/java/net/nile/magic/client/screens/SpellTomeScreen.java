@@ -20,12 +20,10 @@ public class SpellTomeScreen extends HandledScreen<SpellTomeScreenHandler> {
     public SpellTomeScreen(SpellTomeScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         //this.playerInventoryTitleY -= 18;
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        // TODO Auto-generated method stub
 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         client.getTextureManager().bindTexture(TEXTURE);
@@ -37,13 +35,11 @@ public class SpellTomeScreen extends HandledScreen<SpellTomeScreenHandler> {
 
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        // TODO Auto-generated method stub
         super.drawForeground(matrices, mouseX, mouseY);
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // TODO Auto-generated method stub
         super.render(matrices, mouseX, mouseY, delta);
     }
     

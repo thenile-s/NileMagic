@@ -15,6 +15,10 @@ public class Entities implements ModInitializer {
     public static final EntityType<Entity> TORNADO = Registry.register(Registry.ENTITY_TYPE,
      new Identifier(NileMagic.modid, "tornado"), FabricEntityTypeBuilder.create(
          SpawnGroup.MISC, TornadoEntity::new).dimensions(EntityDimensions.fixed(.8f, 1.125f)).build());
+
+         public static final EntityType<Entity> FIRE_BLAST = Registry.register(Registry.ENTITY_TYPE, 
+         new Identifier(NileMagic.modid, "fire_blast"), FabricEntityTypeBuilder.create(SpawnGroup.MISC, 
+         FireBlastEntity::new).dimensions(EntityDimensions.fixed(0.8F, 0.8F)).build());
          
     @Override
 	public void onInitialize() {

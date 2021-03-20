@@ -1,12 +1,16 @@
 {
     "itemGroup.nilemagic.spells": "Nile Magic",
 
+    "container.nilemagic.tome_table" : "Tome Modification",
+
     "item.nilemagic.mana_cookie": "Mana Cookie",
     "item.nilemagic.mana_flesh": "Rotten Mana Chunk",
     "item.nilemagic.mana_reset": "Reset Rock",
     "item.nilemagic.mana_pie": "Mana Pie",
     "item.nilemagic.spell_tome": "Spell Tome",
     "item.nilemagic.spell_scroll": "Spell Scroll",
+    "item.nilemagic.tome_table": "Tome Table",
+
     "block.nilemagic.tome_table": "Tome Table",
 
     "effect.nilemagic.mana_regeneration": "Mana Regeneration",

@@ -11,8 +11,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerFactory;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -23,7 +26,7 @@ import net.minecraft.world.World;
 import net.nile.magic.blocks.entities.TomeTableBlockEntity;
 import net.nile.magic.screenhandlers.SpellTomeScreenHandler;
 
-public class TomeTableBlock extends Block implements NamedScreenHandlerFactory, BlockEntityProvider {
+public class TomeTableBlock extends Block implements ScreenHandlerFactory, BlockEntityProvider {
 
     public TomeTableBlock(Settings settings) {
         super(settings);
@@ -55,10 +58,21 @@ public class TomeTableBlock extends Block implements NamedScreenHandlerFactory, 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
             BlockHitResult hit) {
 
-        player.openHandledScreen(this);
-
-                
-        return super.onUse(state, world, pos, player, hand, hit);
+        if(!world.isClient){
+            Text name = null;
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if(blockEntity instanceof TomeTableBlockEntity){
+                name = ((TomeTableBlockEntity)(blockEntity)).getName();
+            }
+            if(name==null){
+                name = m_displayName;
+            }
+            player.openHandledScreen(new SimpleNamedScreenHandlerFactory(this, name));
+            return ActionResult.CONSUME;
+        }
+        else{
+            return ActionResult.SUCCESS;
+        }
     }
 
 
@@ -68,12 +82,7 @@ public class TomeTableBlock extends Block implements NamedScreenHandlerFactory, 
         return new SpellTomeScreenHandler(syncId, inv);
     }
 
-    private final Text m_displayName = new LiteralText("Tome Table");
-
-    @Override
-    public Text getDisplayName() {
-        return m_displayName;
-    }
+    private final Text m_displayName = new TranslatableText("container.nilemagic.tome_table");
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {

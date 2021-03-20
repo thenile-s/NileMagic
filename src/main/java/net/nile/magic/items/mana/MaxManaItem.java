@@ -51,22 +51,22 @@ public class MaxManaItem extends AbstractManaManipulationItem {
 
     protected void onDecrease(ServerPlayerEntity player, IManaComponent mana, float initial){
         if(initial == mana.getMax()){
-        player.sendMessage(new LiteralText("Not even Apollyon could spoil your spirit further than this..." + initial),false);
+        //player.sendMessage(new LiteralText("Not even Apollyon could spoil your spirit further than this..." + initial),false);
             
         }
         else{
-            player.sendMessage(new LiteralText("Your spirit shudders. Maximum mana decreased to " + mana.getMax() + " from " + initial),false);
+            //player.sendMessage(new LiteralText("Your spirit shudders. Maximum mana decreased to " + mana.getMax() + " from " + initial),false);
 
         }
     }
 
     protected void onIncrease(ServerPlayerEntity player, IManaComponent mana, float initial){
-        player.sendMessage(new LiteralText("Your sprit blooms. Maximum mana increased to " + mana.getMax() + " from " + initial),false);
+        //player.sendMessage(new LiteralText("Your spirit blooms. Maximum mana increased to " + mana.getMax() + " from " + initial),false);
 
     }
 
     protected void onFail(ServerPlayerEntity player, IManaComponent mana){
-        player.sendMessage(new LiteralText("You must seek higher powers... your maximum mana did not change."),false);
+        //player.sendMessage(new LiteralText("You must seek higher powers... your maximum mana did not change."),false);
     }
     
 }

@@ -1,4 +1,10 @@
 {
     "credit": "Made with Blockbench",
-    "parent": "minecraft:block/enchanting_table"
+    "parent": "minecraft:block/enchanting_table",
+    "textures": {
+        "particle": "nilemagic:block/gold_planks",
+        "bottom": "nilemagic:block/gold_planks",
+        "top": "nilemagic:block/tome_table_top",
+        "side": "nilemagic:block/tome_table_side"
+    }
 }

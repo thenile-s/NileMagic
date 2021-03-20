@@ -12,7 +12,7 @@ import net.nile.magic.blocks.entities.TomeTableBlockEntity;
 
 public class Blocks implements ModInitializer {
 
-    public static final Block TOME_TABLE = new TomeTableBlock(FabricBlockSettings.of(Material.WOOD));
+    public static final Block TOME_TABLE = new TomeTableBlock(FabricBlockSettings.of(Material.WOOD).strength(5));
 
     public static BlockEntityType<TomeTableBlockEntity> TOME_TABLE_ENTITY;
 

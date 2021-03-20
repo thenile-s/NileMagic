@@ -106,7 +106,7 @@ public class TomeTableBlockEntity extends BlockEntity implements Nameable, Ticka
     }
  
     public Text getName() {
-       return (Text)(this.customName != null ? this.customName : new TranslatableText("container.tome"));
+       return (Text)(this.customName);
     }
  
     public void setCustomName(@Nullable Text value) {

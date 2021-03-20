@@ -33,14 +33,17 @@ public class SpellTomeScreen extends HandledScreen<SpellTomeScreenHandler> {
 
     }
 
+/*
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
         super.drawForeground(matrices, mouseX, mouseY);
+        //textRenderer.draw(matrices, "", 0, 0, 4210752);
     }
+*/
 
-    @Override
+    /*@Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         super.render(matrices, mouseX, mouseY, delta);
-    }
+    }*/
     
 }
